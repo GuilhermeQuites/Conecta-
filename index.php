@@ -531,10 +531,26 @@ $cmd = "select * from empresas where empresa_id ='$user[user_empresa]'";
                         </li>
                      </ul>
                   </li>
+
+                  </li>
+                  <li class="has-child">
+                     <a href="#">
+                        <span class="nav-icon uil uil-chart-growth-alt" style="color: #02FE4F"></span>
+                        <span class="menu-text" style="color: #02FE4F">Vendedor</span>
+                        <span class="toggle-icon" style="color: #02FE4F"></span>
+                     </a>
+                     <ul>
+                        <li class="">
+                           <a href="vendedor" style="color: #02FE4F">cadastra</a>
+                        </li>
+                     </ul>
+                  </li>
                </ul>
             </div>
          </div>
       </div>
+
+
 
       <div class="contents" style="background-color: gray">
 
@@ -616,6 +632,7 @@ $cmd = "select * from empresas where empresa_id ='$user[user_empresa]'";
                <script src="assets/theme_assets/js/leaflet-init.js"></script>
                <script src="assets/theme_assets/js/main.js"></script>
                <!-- endinject-->
+
 </body>
 
 </html>

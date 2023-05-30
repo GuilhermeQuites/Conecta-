@@ -1,10 +1,10 @@
 <?php
 include_once "bd/conexao.php";
-$artistas = $conn->query($select = "SELECT * FROM artista");
+
 ?>
 <div class="col-lg-12">
     <div class="card card-Vertical card-default card-md mb-4" style="background-color: #3D3D3B">
-        <h1 class="text-center my-5">Cadastrar Contratantes</h1>
+        <h1 class="text-center my-5">Cadastrar Vendedor</h1>
         <div class="card-body py-md-30">
             <div class="horizontal-form">
                 <form action="" method="post">
@@ -20,25 +20,15 @@ $artistas = $conn->query($select = "SELECT * FROM artista");
                             <input type="email" name="email" class="form-control ih-medium ip-gray radius-xs b-light px-15" required>
                         </div>
                         <div class="col-md-6 mb-25">
-                            <label class="col-form-label color-dark fs-14 fw-500 align-center mb-20">Conhecidos</label>
-                            <select class="form-control ih-medium ip-gray radius-xs b-light px-15" id="conhecido" name="conhecido" style="background-color: #51514F" required>
-                                <option value=""></option>
-                                <option value="contratantes">Contratantes</option>
-                                <option value="contratantes_conhecidos">Contratantes Conhecidos</option>
-                                <option value="contratantes_desconhecidos">Contratantes Desconhecidos</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-25">
                             <label class=" col-form-label color-dark fs-14 fw-500 align-center mb-20">Telefone</label>
                             <input type="text" name="telefone" class="form-control ih-medium ip-gray radius-xs b-light px-15" required>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 mb-25">
                             <label for="estado_lead" class="col-form-label color-dark fs-14 fw-500 align-center mb-20">Estado</label>
                             <select type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="estado" name="estado" style="background-color: #51514F" onchange="buscaCidades(this.value)" required>
-                                <option value="" ;></option>
+                                <option value=""></option>
                                 <option value="Acre">Acre</option>
                                 <option value="Alagoas">Alagoas</option>
                                 <option value="Amapá">Amapá</option>
@@ -59,7 +49,7 @@ $artistas = $conn->query($select = "SELECT * FROM artista");
                                 <option value="Rio de Janeiro">Rio de Janeiro</option>
                                 <option value="Rio Grande do Norte">Rio Grande do Norte</option>
                                 <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-                                <option value="Rondônia">Rondônia</option>
+                                <option value="Rondônia">Rond
                                 <option value="Roraima">Roraima</option>
                                 <option value="Santa Catarina">Santa Catarina</option>
                                 <option value="São Paulo">São Paulo</option>
@@ -67,23 +57,12 @@ $artistas = $conn->query($select = "SELECT * FROM artista");
                                 <option value="Tocantins">Tocantins</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
+
+
                         <div class="col-md-6 mb-25">
                             <label for="cidade_lead" class="col-form-label color-dark fs-14 fw-500 align-center mb-20">Cidade</label>
                             <select type="text" id="cidade" name="cidade" class="form-control ih-medium ip-gray radius-xs b-light px-15" style="background-color: #51514F" required>
                                 <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-25">
-                            <label class=" col-form-label color-dark fs-14 fw-500 align-center mb-20">Artista</label>
-                            <select type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" name="artista" style="background-color: #51514F" required>
-                                <option value=""></option>
-                                <?php
-                                while ($row = $artistas->fetch_assoc()) {
-                                    echo '<option value="' . $row["nome_artista"] . '">' . $row["nome_artista"] . '</option>';
-                                }
-                                ?>
                             </select>
                         </div>
                     </div>
@@ -108,18 +87,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telefone = $_POST["telefone"];
     $estado = $_POST["estado"];
     $cidade = $_POST["cidade"];
-    $artista = $_POST["artista"];
-    $conhecido = $_POST["conhecido"];
 
-    // Insere os dados na tabela "contratantes" do banco de dados
-    $insert = "INSERT INTO contratantes (nome_contratante, email_contratante, telefone_contratante, estado_contratante, cidade_contratante, artista_contratante, conhecido_contratante) VALUES ('$nome', '$email', '$telefone', '$estado', '$cidade', '$artista', '$conhecido')";
-    $conn->query($insert);
+    $sql = "INSERT INTO vendedor (nome_vendedor, email_vendedor, telefone_vendedor, estado_vendedor, cidade_vendedor) VALUES ('$nome', '$email', '$telefone', '$estado', '$cidade')";
 
-    // Ações adicionais ou redirecionamento após a inserção dos dados
-    // ...
+    if (mysqli_query($conn, $sql)) {
+        header("Location: entradas/1");
+    } else {
+        header("Location: entradas/2");
+    }
+
+    mysqli_close($conn);
 }
 ?>
-
 <!-- Seu formulário HTML aqui -->
 
 

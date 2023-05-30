@@ -4,170 +4,225 @@ $result = $conn->query($insert = "SELECT * FROM categoria_entradas");
 $artistas = $conn->query($select = "SELECT * FROM artista");
 ?>
 <div class="card card-Vertical card-default card-md mb-4" style="background-color: #3D3D3B">
-      <h1 class="text-center my-5">Cadastro de Leads</h1>
-      <form action="cadastro-lead.php" method="post" class='m-25'>
-        <div class="row">
-          <div class="col-md-6">
-            <label for="nome_lead">Nome</label>
-            <input type="text" class="form-control" id="nome_lead" name="nome_lead" required>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="entrada_lead">Entrada</label>
-            <select type="text" class="form-control" id="entrada_lead" name="entrada_lead" style="background-color: #51514F" required>
-              <option value=""></option>
-              <?php 
-                while($row = $result->fetch_assoc()){
-                  echo '<option value="'.$row["nome_cat_entrada"].'">'.$row["nome_cat_entrada"].'</option>';
-                }
-              ?>
-            </select>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="artista_lead">Artista de Interesse</label>
-            <select type="text" class="form-control" id="artista_lead" name="artista_lead" style="background-color: #51514F" required>
-              <option value=""></option>
-              <?php 
-                while($row = $artistas->fetch_assoc()){
-                  echo '<option value="'.$row["nome_artista"].'">'.$row["nome_artista"].'</option>';
-                }
-              ?>
-            </select>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="nome_casa_noturna">Nome casa noturna</label>
-            <input type="text" class="form-control" id="nome_casa_noturna" name="nome_casa_noturna">
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="telefone_lead">Telefone</label>
-            <input type="text" class="form-control" id="telefone_lead" name="telefone_lead" required>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="email_lead">E-mail</label>
-            <input type="email" class="form-control" id="email_lead" name="email_lead" required>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="estado_lead">Estado</label>
-            <select type="text" class="form-control" id="estado_lead" name="estado_lead" style="background-color: #51514F" onchange="(buscaCidades(this.value))" required>
-              <option value="";></option>
-              <option value="Acre">Acre</option>
-              <option value="Alagoas">Alagoas</option>
-              <option value="Amapá">Amapá</option>
-              <option value="Amazonas">Amazonas</option>
-              <option value="Bahia">Bahia</option>
-              <option value="Ceará">Ceará</option>
-              <option value="Distrito Federal">Distrito Federal</option>
-              <option value="Espírito Santo">Espírito Santo</option>
-              <option value="Goiás">Goiás</option>
-              <option value="Maranhão">Maranhão</option>
-              <option value="Mato Grosso">Mato Grosso</option>
-              <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-              <option value="Minas Gerais">Minas Gerais</option>
-              <option value="Pará">Pará</option>
-              <option value="Paraíba">Paraíba</option>
-              <option value="Pernambuco">Pernambuco</option>
-              <option value="Piauí">Piauí</option>
-              <option value="Rio de Janeiro">Rio de Janeiro</option>
-              <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-              <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-              <option value="Rondônia">Rondônia</option>
-              <option value="Roraima">Roraima</option>
-              <option value="Santa Catarina">Santa Catarina</option>
-              <option value="São Paulo">São Paulo</option>
-              <option value="Sergipe">Sergipe</option>
-              <option value="Tocantins">Tocantins</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="cidade_lead">Cidade</label>
-            <select type="text" id="cidade" name="cidade_lead" class="form-control" placeholder="Cidade" onchange="buscaRegional(this.value)" style="background-color: #51514F" required>
-              <option value=""></option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="data_lead">Data Contato</label>
-            <input type="date" class="form-control" id="data_lead" name="data_lead" required>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="data_show">Data Show</label>
-            <input type="date" class="form-control" id="data_show" name="data_show" required>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="melhor_horario_lead">Melhor horário</label>
-            <select type="text" class="form-control" id="melhor_horario_lead" name="melhor_horario_lead" style="background-color: #51514F" required>
-              <option value=""></option>
-              <option value="Manhã">Manhã</option>
-              <option value="Tarde">Tarde</option>
-              <option value="Noite">Noite</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="classificacao_lead">Classificação</label>
-            <select type="text" class="form-control" id="classificacao_lead" name="classificacao_lead" style="background-color: #51514F" required>
-              <option value=""></option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="valor_lead">Valor</label>
-            <input type="text" class="form-control" id="valor_lead" name="valor_lead" required>
-          </div>
-          <div class="col-md-6 mb-25">
-            <label for="status_lead">Status</label>
-            <select class="form-control" id="status_lead" name="status_lead" style="background-color: #51514F" required>
-              <option value=""></option>
-              <option value="cotação">Cotação</option>
-              <option value="reserva">Reserva</option>
-              <option value="fechado">Fechado</option>
-              <option value="não fechado">Não fechado</option>
-            </select>
-          </div>
-        <div class="form-row">
-          <div class="col-md-6 mb-25">
-            <label for="descricao_lead">Descrição</label>
-            <textarea type="text" class="form-control" id="descricao_lead" name="descricao_lead" required></textarea>
-          </div>
-          <button type="submit" name="submit" class="btn btn-success">Cadastrar Lead</button>
-        </div>
-        <input type="hidden" id="mesorregiao" name="mesorregiao_lead" value="">
-        <input type="hidden" id="regiao" name="regiao_lead" value="">
-      </form>
+  <h1 class="text-center my-5">Cadastro de Leads</h1>
+  <form action="cadastro-lead.php" method="post" class='m-25'>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="nome_lead">Nome</label>
+        <input type="text" class="form-control" id="nome_lead" name="nome_lead" required>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="artista_lead">Artista de Interesse</label>
+        <select type="text" class="form-control" id="artista_lead" name="artista_lead" style="background-color: #51514F" required>
+          <option value=""></option>
+          <?php
+          while ($row = $artistas->fetch_assoc()) {
+            echo '<option value="' . $row["nome_artista"] . '">' . $row["nome_artista"] . '</option>';
+          }
+          ?>
+        </select>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="nome_casa_noturna">Nome casa noturna</label>
+        <input type="text" class="form-control" id="nome_casa_noturna" name="nome_casa_noturna">
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="telefone_lead">Telefone</label>
+        <input type="text" class="form-control" id="telefone_lead" name="telefone_lead" required>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="email_lead">E-mail</label>
+        <input type="email" class="form-control" id="email_lead" name="email_lead" required>
+      </div>
+
+      <?php
+      // Configurações do banco de dados
+      $servidor = "localhost";
+      $usuario = "root";
+      $senha = "";
+      $dbname = "grupofmvapp_conecta";
+
+      // Criando a conexão com o banco de dados
+      $conn = new mysqli($servidor, $usuario, $senha, $dbname);
+
+      // Verificando a conexão
+      if ($conn->connect_error) {
+        die("Falha na conexão com o banco de dados: " . $conn->connect_error);
+      }
+
+      // Consulta SQL para obter os contratantes
+      $contratantesSql = "SELECT id_contratante, nome_contratante FROM contratantes";
+      $contratantesResult = $conn->query($contratantesSql);
+
+      // Consulta SQL para obter os vendedores
+      $vendedoresSql = "SELECT vendedor_id , nome_vendedor FROM vendedor";
+      $vendedoresResult = $conn->query($vendedoresSql);
+
+      if ($contratantesResult->num_rows > 0) {
+        echo '<div class="col-md-6 mb-25">';
+        echo '<label for="id_contratante">Contratante</label>';
+        echo '<select name="id_contratante" id="id_contratante" class="form-control">';
+        echo '<option value=""></option>';
+
+        while ($row = $contratantesResult->fetch_assoc()) {
+          $idContratante = $row["id_contratante"];
+          $nomeContratante = $row["nome_contratante"];
+
+          echo '<option value="' . $idContratante . '" style="color: black;">' . $nomeContratante . '</option>';
+        }
+
+        echo '</select>';
+        echo '</div>';
+      } else {
+        echo 'Nenhum contratante encontrado.';
+      }
+
+      if ($vendedoresResult->num_rows > 0) {
+        echo '<div class="col-md-6 mb-25">';
+        echo '<label for="vendedor_id">Vendedor</label>';
+        echo '<select name="vendedor_id" id="vendedor_id" class="form-control">';
+        echo '<option value=""></option>';
+
+        while ($row = $vendedoresResult->fetch_assoc()) {
+          $idVendedor = $row["vendedor_id"];
+          $nomeVendedor = $row["nome_vendedor"];
+
+          echo '<option value="' . $idVendedor . '" style="color: black; ">' . $nomeVendedor . '</option>';
+        }
+
+        echo '</select>';
+        echo '</div>';
+      } else {
+        echo 'Nenhum vendedor encontrado.';
+      }
+
+      // Fechando a conexão com o banco de dados
+      $conn->close();
+      ?>
+
+
+
+      <div class="col-md-6 mb-25">
+        <label for="estado_lead">Estado</label>
+        <select type="text" class="form-control" id="estado_lead" name="estado_lead" style="background-color: #51514F" onchange="(buscaCidades(this.value))" required>
+          <option value="" ;></option>
+          <option value="Acre">Acre</option>
+          <option value="Alagoas">Alagoas</option>
+          <option value="Amapá">Amapá</option>
+          <option value="Amazonas">Amazonas</option>
+          <option value="Bahia">Bahia</option>
+          <option value="Ceará">Ceará</option>
+          <option value="Distrito Federal">Distrito Federal</option>
+          <option value="Espírito Santo">Espírito Santo</option>
+          <option value="Goiás">Goiás</option>
+          <option value="Maranhão">Maranhão</option>
+          <option value="Mato Grosso">Mato Grosso</option>
+          <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+          <option value="Minas Gerais">Minas Gerais</option>
+          <option value="Pará">Pará</option>
+          <option value="Paraíba">Paraíba</option>
+          <option value="Pernambuco">Pernambuco</option>
+          <option value="Piauí">Piauí</option>
+          <option value="Rio de Janeiro">Rio de Janeiro</option>
+          <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+          <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+          <option value="Rondônia">Rondônia</option>
+          <option value="Roraima">Roraima</option>
+          <option value="Santa Catarina">Santa Catarina</option>
+          <option value="São Paulo">São Paulo</option>
+          <option value="Sergipe">Sergipe</option>
+          <option value="Tocantins">Tocantins</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="cidade_lead">Cidade</label>
+        <select type="text" id="cidade" name="cidade_lead" class="form-control" placeholder="Cidade" onchange="buscaRegional(this.value)" style="background-color: #51514F" required>
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="data_lead">Data Contato</label>
+        <input type="date" class="form-control" id="data_lead" name="data_lead" required>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="data_show">Data Show</label>
+        <input type="date" class="form-control" id="data_show" name="data_show" required>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="melhor_horario_lead">Melhor horário</label>
+        <select type="text" class="form-control" id="melhor_horario_lead" name="melhor_horario_lead" style="background-color: #51514F" required>
+          <option value=""></option>
+          <option value="Manhã">Manhã</option>
+          <option value="Tarde">Tarde</option>
+          <option value="Noite">Noite</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="classificacao_lead">Classificação</label>
+        <select type="text" class="form-control" id="classificacao_lead" name="classificacao_lead" style="background-color: #51514F" required>
+          <option value=""></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="valor_lead">Valor</label>
+        <input type="text" class="form-control" id="valor_lead" name="valor_lead" required>
+      </div>
+      <div class="col-md-6 mb-25">
+        <label for="status_lead">Status</label>
+        <select class="form-control" id="status_lead" name="status_lead" style="background-color: #51514F" required>
+          <option value=""></option>
+          <option value="cotação">Cotação</option>
+          <option value="reserva">Reserva</option>
+          <option value="fechado">Fechado</option>
+          <option value="não fechado">Não fechado</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-25">
+        <label for="descricao_lead">Descrição</label>
+        <textarea type="text" class="form-control" id="descricao_lead" name="descricao_lead" required></textarea>
+      </div>
+      <button type="submit" name="submit" class="btn btn-success">Cadastrar Lead</button>
+      <input type="hidden" id="mesorregiao" name="mesorregiao_lead" value="">
+      <input type="hidden" id="regiao" name="regiao_lead" value="">
+  </form>
 </div>
 
 
 <?php
-  $url = implode("/", $_GET);
-  $url_links = explode("/", $url);
+$url = implode("/", $_GET);
+$url_links = explode("/", $url);
 
-  if(isset($url_links[1])){
-    if($url_links[1] == 1){
-      ?><script>
-        document.getElementById('msg_cadastro').innerHTML = "Lead cadastrado com sucesso!"
-      </script>
-<?php
-  }else{
-    ?>
+if (isset($url_links[1])) {
+  if ($url_links[1] == 1) {
+?><script>
+      document.getElementById('msg_cadastro').innerHTML = "Lead cadastrado com sucesso!"
+    </script>
+  <?php
+  } else {
+  ?>
     <script>
       document.getElementById('msg_cadastro').innerHTML = "Erro no cadastro de Lead!"
     </script>
 <?php
-    }
   }
+}
 ?>
 
 
 <script>
-    var json_cidades = {
-    "estados": [
-      {
+  var json_cidades = {
+    "estados": [{
         "sigla": "AC",
         "nome": "Acre",
         "cidades": [
@@ -5927,55 +5982,55 @@ $artistas = $conn->query($select = "SELECT * FROM artista");
     ]
   }
 
-    function buscaCidades(e) {
-        document.querySelector("#cidade").innerHTML = '';
-        var cidade_select = document.querySelector("#cidade");
+  function buscaCidades(e) {
+    document.querySelector("#cidade").innerHTML = '';
+    var cidade_select = document.querySelector("#cidade");
 
-        var num_estados = json_cidades.estados.length;
-        var j_index = -1;
+    var num_estados = json_cidades.estados.length;
+    var j_index = -1;
 
-        // aqui eu pego o index do Estado dentro do JSON
-        for (var x = 0; x < num_estados; x++) {
-            if (json_cidades.estados[x].nome == e) {
-                j_index = x;
-            }
-        }
-
-        if (j_index != -1) {
-
-            // aqui eu percorro todas as cidades e crio os OPTIONS
-            json_cidades.estados[j_index].cidades.forEach(function(cidade) {
-                var cid_opts = document.createElement('option');
-                cid_opts.setAttribute('value', cidade)
-                cid_opts.innerHTML = cidade;
-                cidade_select.appendChild(cid_opts);
-            });
-        } else {
-            document.querySelector("#cidade").innerHTML = '';
-        }
-    }
-
-    function buscaRegional(e){
-      // document.querySelector("#regional").innerHTML = '';
-      // var regional_select = document.querySelector("#regional");
-      var estado = $('#estado_lead').val();
-      var sigla_consulta = '';
-      var num_estados = json_cidades.estados.length;
-
-      for(var x = 0; x < num_estados; x++){
-        if(json_cidades.estados[x].nome == estado){
-          sigla_consulta = json_cidades.estados[x].sigla;
-        }
+    // aqui eu pego o index do Estado dentro do JSON
+    for (var x = 0; x < num_estados; x++) {
+      if (json_cidades.estados[x].nome == e) {
+        j_index = x;
       }
-      $.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados/"+ sigla_consulta + "/municipios", function(data){
-        var arrayJson = JSON.parse(JSON.stringify(data));
-        arrayJson.forEach(function(municipio){
-          if(municipio.nome == e){
-
-            $("#mesorregiao").val(municipio.microrregiao.mesorregiao.nome)
-            $("#regiao").val(municipio.microrregiao.mesorregiao.UF.regiao.nome)
-          }
-        })
-      })
     }
+
+    if (j_index != -1) {
+
+      // aqui eu percorro todas as cidades e crio os OPTIONS
+      json_cidades.estados[j_index].cidades.forEach(function(cidade) {
+        var cid_opts = document.createElement('option');
+        cid_opts.setAttribute('value', cidade)
+        cid_opts.innerHTML = cidade;
+        cidade_select.appendChild(cid_opts);
+      });
+    } else {
+      document.querySelector("#cidade").innerHTML = '';
+    }
+  }
+
+  function buscaRegional(e) {
+    // document.querySelector("#regional").innerHTML = '';
+    // var regional_select = document.querySelector("#regional");
+    var estado = $('#estado_lead').val();
+    var sigla_consulta = '';
+    var num_estados = json_cidades.estados.length;
+
+    for (var x = 0; x < num_estados; x++) {
+      if (json_cidades.estados[x].nome == estado) {
+        sigla_consulta = json_cidades.estados[x].sigla;
+      }
+    }
+    $.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + sigla_consulta + "/municipios", function(data) {
+      var arrayJson = JSON.parse(JSON.stringify(data));
+      arrayJson.forEach(function(municipio) {
+        if (municipio.nome == e) {
+
+          $("#mesorregiao").val(municipio.microrregiao.mesorregiao.nome)
+          $("#regiao").val(municipio.microrregiao.mesorregiao.UF.regiao.nome)
+        }
+      })
+    })
+  }
 </script>
