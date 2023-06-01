@@ -23,85 +23,95 @@ $artistas = $conn->query($select = "SELECT * FROM artista");
                             <label class="col-form-label color-dark fs-14 fw-500 align-center mb-20">Conhecidos</label>
                             <select class="form-control ih-medium ip-gray radius-xs b-light px-15" id="conhecido" name="conhecido" style="background-color: #51514F" required>
                                 <option value=""></option>
-                                <option value="contratantes">Contratantes</option>
-                                <option value="contratantes_conhecidos">Contratantes Conhecidos</option>
-                                <option value="contratantes_desconhecidos">Contratantes Desconhecidos</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-25">
-                            <label class=" col-form-label color-dark fs-14 fw-500 align-center mb-20">Telefone</label>
-                            <input type="text" name="telefone" class="form-control ih-medium ip-gray radius-xs b-light px-15" required>
-                        </div>
-                        <div class="col-md-6 mb-25">
-                            <label for="estado_lead" class="col-form-label color-dark fs-14 fw-500 align-center mb-20">Estado</label>
-                            <select type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="estado" name="estado" style="background-color: #51514F" onchange="buscaCidades(this.value)" required>
-                                <option value="" ;></option>
-                                <option value="Acre">Acre</option>
-                                <option value="Alagoas">Alagoas</option>
-                                <option value="Amapá">Amapá</option>
-                                <option value="Amazonas">Amazonas</option>
-                                <option value="Bahia">Bahia</option>
-                                <option value="Ceará">Ceará</option>
-                                <option value="Distrito Federal">Distrito Federal</option>
-                                <option value="Espírito Santo">Espírito Santo</option>
-                                <option value="Goiás">Goiás</option>
-                                <option value="Maranhão">Maranhão</option>
-                                <option value="Mato Grosso">Mato Grosso</option>
-                                <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-                                <option value="Minas Gerais">Minas Gerais</option>
-                                <option value="Pará">Pará</option>
-                                <option value="Paraíba">Paraíba</option>
-                                <option value="Pernambuco">Pernambuco</option>
-                                <option value="Piauí">Piauí</option>
-                                <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-                                <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-                                <option value="Rondônia">Rondônia</option>
-                                <option value="Roraima">Roraima</option>
-                                <option value="Santa Catarina">Santa Catarina</option>
-                                <option value="São Paulo">São Paulo</option>
-                                <option value="Sergipe">Sergipe</option>
-                                <option value="Tocantins">Tocantins</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-25">
-                            <label for="cidade_lead" class="col-form-label color-dark fs-14 fw-500 align-center mb-20">Cidade</label>
-                            <select type="text" id="cidade" name="cidade" class="form-control ih-medium ip-gray radius-xs b-light px-15" style="background-color: #51514F" required>
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-25">
-                            <label class=" col-form-label color-dark fs-14 fw-500 align-center mb-20">Artista</label>
-                            <select type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" name="artista" style="background-color: #51514F" required>
-                                <option value=""></option>
                                 <?php
-                                while ($row = $artistas->fetch_assoc()) {
-                                    echo '<option value="' . $row["nome_artista"] . '">' . $row["nome_artista"] . '</option>';
+                                $sql = "SELECT conhecidos_id, contratante FROM conhecidos";
+                                $result = $conn->query($sql);
+
+                                // Verifica se a consulta retornou resultados
+                                if ($result->num_rows > 0) {
+                                    // Exibe as opções do select com os contratantes
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<option value='" . $row["conhecidos_id"] . "'>" . $row["contratante"] . "</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>Nenhum contratante encontrado.</option>";
                                 }
                                 ?>
                             </select>
                         </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="col-sm-5" style="margin-top: 1.5px;">
-                            <button type="submit" name="submit" class="btn btn-success btn-default radius-xs btn-squared px-30">Cadastrar</button>
+                        <div class="row">
+                            <div class="col-md-6 mb-25">
+                                <label class=" col-form-label color-dark fs-14 fw-500 align-center mb-20">Telefone</label>
+                                <input type="text" name="telefone" class="form-control ih-medium ip-gray radius-xs b-light px-15" required>
+                            </div>
+                            <div class="col-md-6 mb-25">
+                                <label for="estado_lead" class="col-form-label color-dark fs-14 fw-500 align-center mb-20">Estado</label>
+                                <select type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="estado" name="estado" style="background-color: #51514F" onchange="buscaCidades(this.value)" required>
+                                    <option value="" ;></option>
+                                    <option value="Acre">Acre</option>
+                                    <option value="Alagoas">Alagoas</option>
+                                    <option value="Amapá">Amapá</option>
+                                    <option value="Amazonas">Amazonas</option>
+                                    <option value="Bahia">Bahia</option>
+                                    <option value="Ceará">Ceará</option>
+                                    <option value="Distrito Federal">Distrito Federal</option>
+                                    <option value="Espírito Santo">Espírito Santo</option>
+                                    <option value="Goiás">Goiás</option>
+                                    <option value="Maranhão">Maranhão</option>
+                                    <option value="Mato Grosso">Mato Grosso</option>
+                                    <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                    <option value="Minas Gerais">Minas Gerais</option>
+                                    <option value="Pará">Pará</option>
+                                    <option value="Paraíba">Paraíba</option>
+                                    <option value="Pernambuco">Pernambuco</option>
+                                    <option value="Piauí">Piauí</option>
+                                    <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                    <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                    <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                    <option value="Rondônia">Rondônia</option>
+                                    <option value="Roraima">Roraima</option>
+                                    <option value="Santa Catarina">Santa Catarina</option>
+                                    <option value="São Paulo">São Paulo</option>
+                                    <option value="Sergipe">Sergipe</option>
+                                    <option value="Tocantins">Tocantins</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-25">
+                                <label for="cidade_lead" class="col-form-label color-dark fs-14 fw-500 align-center mb-20">Cidade</label>
+                                <select type="text" id="cidade" name="cidade" class="form-control ih-medium ip-gray radius-xs b-light px-15" style="background-color: #51514F" required>
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-25">
+                                <label class=" col-form-label color-dark fs-14 fw-500 align-center mb-20">Artista</label>
+                                <select type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" name="artista" style="background-color: #51514F" required>
+                                    <option value=""></option>
+                                    <?php
+                                    while ($row = $artistas->fetch_assoc()) {
+                                        echo '<option value="' . $row["nome_artista"] . '">' . $row["nome_artista"] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="col-sm-5" style="margin-top: 1.5px;">
+                                <button type="submit" name="submit" class="btn btn-success btn-default radius-xs btn-squared px-30">Cadastrar</button>
+                            </div>
                         </div>
                     </div>
             </div>
+            </form>
         </div>
-        </form>
     </div>
-</div>
 </div>
 
 <?php
 include_once "bd/conexao.php";
 
+// Verifica se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];
     $email = $_POST["email"];
@@ -119,6 +129,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ...
 }
 ?>
+
+
+
 
 <!-- Seu formulário HTML aqui -->
 
